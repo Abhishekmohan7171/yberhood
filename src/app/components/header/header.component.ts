@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
+  standalone: true,
   imports: [RouterLink, RouterLinkActive, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
@@ -11,7 +12,10 @@ import { CommonModule } from '@angular/common';
 export class HeaderComponent {
   isMobileMenuOpen = false;
 
-  toggleMobileMenu() {
+  toggleMobileMenu(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 

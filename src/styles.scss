@@ -3,10 +3,54 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .gradient-glow {
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: -1;
+    }
+  }
+  
+  .gradient-glow-pink {
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(236, 72, 153, 0.2) 0%, transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: -1;
+    }
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
   background-color: #0f0a1f;
+  background-image: 
+    radial-gradient(ellipse at 20% 30%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(168, 85, 247, 0.08) 0%, transparent 60%);
+  background-attachment: fixed;
   color: #ffffff;
   font-family: 'Jersey 10', sans-serif;
+  min-height: 100vh;
 }

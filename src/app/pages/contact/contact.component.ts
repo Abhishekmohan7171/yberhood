@@ -36,9 +36,9 @@ export class ContactComponent implements OnInit {
     this.submitError = false;
 
     try {
-      const serviceId = 'YOUR_SERVICE_ID';
-      const templateId = 'YOUR_TEMPLATE_ID';
-      const publicKey = 'YOUR_PUBLIC_KEY';
+      const serviceId = 'service_6rspj4p';
+      const templateId = 'template_tnftroq';
+      const publicKey = 'qLDAzGKqLuW07WUta';
 
       const templateParams = {
         to_email: 'abhishekmohan7171@gmail.com',
@@ -47,7 +47,11 @@ export class ContactComponent implements OnInit {
         reply_to: this.contactForm.value.email
       };
 
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      console.log('Sending email with params:', templateParams);
+      console.log('Using service:', serviceId, 'template:', templateId);
+
+      const response = await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      console.log('Email sent successfully!', response);
       
       this.submitSuccess = true;
       this.contactForm.reset();
@@ -56,8 +60,13 @@ export class ContactComponent implements OnInit {
         this.submitSuccess = false;
       }, 5000);
       
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error sending email:', error);
+      console.error('Error details:', {
+        status: error?.status,
+        text: error?.text,
+        message: error?.message
+      });
       this.submitError = true;
       
       setTimeout(() => {

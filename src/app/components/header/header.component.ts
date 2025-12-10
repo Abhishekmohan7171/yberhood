@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
+import { HostListener } from '@angular/core';
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -11,6 +13,12 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent {
   isMobileMenuOpen = false;
+  scrolled = false;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.scrolled = window.scrollY > 10;
+  }
 
   toggleMobileMenu(event?: Event) {
     if (event) {
@@ -23,3 +31,4 @@ export class HeaderComponent {
     this.isMobileMenuOpen = false;
   }
 }
+

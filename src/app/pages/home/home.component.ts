@@ -36,6 +36,10 @@ export class HomeComponent implements OnInit {
     this.submitError = false;
 
     try {
+      const fromEmail = this.contactForm.value.email || 'anonymous@yberhood.com';
+      const messageContent = this.contactForm.value.message;
+      const messageWithSender = `Message from: ${fromEmail}\n\n${messageContent}`;
+
       // EmailJS configuration
       const serviceId = 'service_6rspj4p';
       const templateId = 'template_tnftroq';
@@ -43,9 +47,11 @@ export class HomeComponent implements OnInit {
 
       const templateParams = {
         to_email: 'abhishekmohan7171@gmail.com',
-        from_email: this.contactForm.value.email || 'anonymous@yberhood.com',
-        message: this.contactForm.value.message,
-        reply_to: this.contactForm.value.email || 'noreply@yberhood.com'
+        from_email: fromEmail,
+        message: messageWithSender,
+        message_from: fromEmail,
+        message_with_sender: messageWithSender,
+        reply_to: fromEmail
       };
 
       console.log('Sending email with params:', templateParams);
